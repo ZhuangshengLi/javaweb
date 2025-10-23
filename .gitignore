@@ -1,0 +1,34 @@
+# 忽略资料文件夹及其所有内容
+资料/
+资料/**
+
+# Maven 构建文件
+maven-project/target/
+*.class
+*.jar
+*.war
+*.ear
+
+# IDE 文件
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 日志文件
+*.log
+
+# 临时文件
+*.tmp
+*.temp
+
+# 其他不需要版本控制的文件
+*.png
+*.jpg
+*.jpeg
+*.gif
