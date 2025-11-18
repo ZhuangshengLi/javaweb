@@ -10,6 +10,8 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  banner:
+    charset: GBK
 
 mybatis:
   mapper-locations: classpath:com/iheima/mapper/*.xml
@@ -17,8 +19,11 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
 
-# logging:
-#   level:
-#     org.springframework.jdbc.support.JdbcTransactionManager: debug
+aliyun:
+  oss:
+    endpoint: https://oss-us-west-1.aliyuncs.com
+    bucket-name: sherry-java-dev
+    region: us-west-1
+
 
 

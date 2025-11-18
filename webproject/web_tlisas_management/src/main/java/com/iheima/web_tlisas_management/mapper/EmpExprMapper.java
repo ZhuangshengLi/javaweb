@@ -10,4 +10,6 @@ import com.iheima.web_tlisas_management.pojo.EmpExpr;
 public interface EmpExprMapper {
 
     public void insertBatch(List<EmpExpr> exprList);
+
+    public void deleteByEmpIds(List<Integer> ids);
 }

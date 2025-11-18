@@ -13,6 +13,7 @@ import com.iheima.web_tlisas_management.service.EmpLogService;
 import com.iheima.web_tlisas_management.service.EmpService;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,16 +51,50 @@ public class EmpServiceImpl implements EmpService {
             emp.setUpdateTime(LocalDateTime.now());     
             empMapper.insert(emp);
 
-            Integer empId = emp.getId();
-
             List<EmpExpr> exprList = emp.getExprList();
-            if(!CollectionUtils.isEmpty(exprList)) {
-                exprList.forEach(expr -> expr.setEmpId(empId));
+            if(!CollectionUtils.isEmpty(exprList)){
+                exprList.forEach(empExpr -> {
+                    empExpr.setEmpId(emp.getId());
+                });
                 empExprMapper.insertBatch(exprList);
             }
         } finally {
         EmpLog empLog = new EmpLog(null, LocalDateTime.now(), "Add employee: " + emp.toString());
         empLogService.insertLog(empLog);
+        }
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void delete(List<Integer> ids) {
+        try {
+            empMapper.deleteByIds(ids);
+            empExprMapper.deleteByEmpIds(ids);
+        } finally {
+            EmpLog empLog = new EmpLog(null, LocalDateTime.now(), "Delete employees: " + ids.toString());
+            empLogService.insertLog(empLog);
+        }
+    }
+
+    @Override
+    public Emp getInfo(Integer id) {
+        return empMapper.getById(id);
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void update(Emp emp){
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.updateById(emp);
+
+        empExprMapper.deleteByEmpIds(Arrays.asList(emp.getId()));
+
+        List<EmpExpr> exprList = emp.getExprList();
+        if(!CollectionUtils.isEmpty(exprList)){
+            exprList.forEach(empExpr -> {
+                empExpr.setEmpId(emp.getId());
+            });
+            empExprMapper.insertBatch(exprList);
         }
     }
 }
