@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.iheima.web_tlisas_management.pojo.ClazzCountOption;
 import com.iheima.web_tlisas_management.pojo.JobOption;
 import com.iheima.web_tlisas_management.pojo.Result;
 import com.iheima.web_tlisas_management.service.ReportService;
@@ -34,5 +35,19 @@ public class ReportController {
         log.info("Get employee gender data");
         List<Map<String, Object>> empGenderData = reportService.getEmpGenderData();
         return Result.success(empGenderData);
+    }
+
+    @GetMapping("/studentDegreeData")
+    public Result getStudentDegreeData(){
+        log.info("Get student degree data");
+        List<Map> dataList = reportService.getStudentDegreeData();
+        return Result.success(dataList);
+    }
+
+    @GetMapping("/studentCountData")
+    public Result getStudentCountData(){
+        log.info("Get student count data");
+        ClazzCountOption clazzCountOption = reportService.getStudentCountData();
+        return Result.success(clazzCountOption);
     }
 }
