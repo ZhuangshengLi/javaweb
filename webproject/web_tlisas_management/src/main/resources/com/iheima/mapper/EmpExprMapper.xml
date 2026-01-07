@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.iheima.web_tlisas_management.mapper.EmpExprMapper">
+<mapper namespace="com.iheima.mapper.EmpExprMapper">
     <insert id="insertBatch">
         INSERT INTO emp_expr (emp_id, begin, end, company, job) 
         VALUES 

@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.iheima.web_tlisas_management.mapper.ClazzMapper">
-    <insert id="insert" parameterType="com.iheima.web_tlisas_management.pojo.Cla">
+<mapper namespace="com.iheima.mapper.ClazzMapper">
+    <insert id="insert" parameterType="com.iheima.pojo.Cla">
         INSERT INTO clazz VALUES (null,#{name},#{room},#{beginDate},#{endDate},#{masterId}, #{subject},#{createTime},#{updateTime})
     </insert>
 
-    <select id="list" resultType="com.iheima.web_tlisas_management.pojo.Cla">
+    <select id="list" resultType="com.iheima.pojo.Cla">
         SELECT 
             c.*,
             e.name as masterName,
@@ -26,11 +26,11 @@
         ORDER BY c.update_time DESC
     </select>
 
-    <select id="getInfo" resultType="com.iheima.web_tlisas_management.pojo.Cla">
+    <select id="getInfo" resultType="com.iheima.pojo.Cla">
         SELECT * FROM clazz WHERE id = #{id}
     </select>
 
-    <update id="update" parameterType="com.iheima.web_tlisas_management.pojo.Cla">
+    <update id="update" parameterType="com.iheima.pojo.Cla">
         UPDATE clazz 
         <set>
             <if test="name != null and name != ''">
@@ -62,7 +62,7 @@
         DELETE FROM clazz WHERE id = #{id}
     </delete>
 
-    <select id="findAll" resultType="com.iheima.web_tlisas_management.pojo.Cla">
+    <select id="findAll" resultType="com.iheima.pojo.Cla">
         SELECT * FROM clazz
     </select>
 </mapper>
